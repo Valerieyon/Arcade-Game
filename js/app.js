@@ -3,7 +3,7 @@ var Enemy = function(x, y) {
     this.x = x;
     this.y = y;
     //border with randomized speed
-    this.speed = 100 + Math.floor(Math.random() * 500);
+    this.speed = 100 + Math.floor(Math.random() * 220);
     this.sprite = "images/enemy-bug.png";
 };
 
@@ -16,7 +16,19 @@ Enemy.prototype.update = function(dt) {
     if (this.x >=  505) {
         this.x = -30;
     }
+    this.checkCollisions()
 };
+
+Enemy.prototype.checkCollisions = function() {
+    if (Math.abs(player.y-this.y) < 60) {
+        if (Math.abs(player.x-this.x) < 80) {
+            player.x = 200;
+            player.y = 400;
+            alert("Game Over");
+        }
+    }
+};
+
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
